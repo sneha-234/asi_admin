@@ -178,7 +178,7 @@ export default function Content() {
 
 {content.hero_image && (
   <img
-    src={`http://localhost:5000${content.hero_image}`}
+    src={`https://asi-admin-4.onrender.com${content.hero_image}`}
     alt="Hero"
     width="200"
   />
@@ -251,7 +251,7 @@ export default function Content() {
 
                 {content.leader_image_1 && (
                   <img
-                    src={`http://localhost:5000${content.leader_image_1}`}
+                    src={`https://asi-admin-4.onrender.com${content.leader_image_1}`}
                     alt="Leader 1"
                     width="200"
                   />
@@ -296,7 +296,7 @@ export default function Content() {
 
                 {content.leader_image_2 && (
                   <img
-                    src={`http://localhost:5000${content.leader_image_2}`}
+                    src={`https://asi-admin-4.onrender.com${content.leader_image_2}`}
                     alt="Leader 2"
                     width="200"
                   />

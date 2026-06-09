@@ -295,7 +295,7 @@ export default function Brands() {
                 {brand.logo && (
 
                   <img
-                    src={`http://localhost:5000${brand.logo}`}
+                    src={`https://asi-admin-4.onrender.com${brand.logo}`}
                     alt="Brand Logo"
                     className="brand-logo"
                   />

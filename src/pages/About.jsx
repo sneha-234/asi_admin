@@ -259,7 +259,7 @@ const saveAbout = async () => {
 {aboutData.hero_image && (
 
   <img
-    src={`http://localhost:5000${aboutData.hero_image}`}
+    src={`https://asi-admin-4.onrender.com${aboutData.hero_image}`}
     width="150"
     alt=""
   />
@@ -313,7 +313,7 @@ const saveAbout = async () => {
 {aboutData.vision_image && (
 
   <img
-    src={`http://localhost:5000${aboutData.vision_image}`}
+    src={`https://asi-admin-4.onrender.com${aboutData.vision_image}`}
     width="150"
     alt=""
   />
@@ -373,7 +373,7 @@ const saveAbout = async () => {
 {aboutData.presence_image1 && (
 
   <img
-    src={`http://localhost:5000${aboutData.presence_image1}`}
+    src={`https://asi-admin-4.onrender.com${aboutData.presence_image1}`}
     width="150"
     alt=""
   />
@@ -396,7 +396,7 @@ const saveAbout = async () => {
 {aboutData.presence_image2 && (
 
   <img
-    src={`http://localhost:5000${aboutData.presence_image2}`}
+    src={`https://asi-admin-4.onrender.com${aboutData.presence_image2}`}
     width="150"
     alt=""
   />

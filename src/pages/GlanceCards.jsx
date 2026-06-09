@@ -281,7 +281,7 @@ const saveCards = async () => {
 
             {card.icon && typeof card.icon === "string" && (
               <img
-                src={`http://localhost:5000${card.icon}`}
+                src={`https://asi-admin-4.onrender.com${card.icon}`}
                 alt=""
                 width="80"
               />

@@ -275,7 +275,7 @@ export default function ContactUs() {
 
               <img
                 src={
-                  "http://localhost:5000" +
+                  "https://asi-admin-4.onrender.com" +
                   pageData.bannerImage
                 }
                 alt=""

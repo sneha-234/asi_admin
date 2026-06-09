@@ -283,7 +283,7 @@ export default function Products() {
             productPage.bannerImage && (
 
               <img
-                src={`http://localhost:5000${productPage.bannerImage}`}
+                src={`https://asi-admin-4.onrender.com${productPage.bannerImage}`}
                 width="250"
                 alt=""
                 style={{
