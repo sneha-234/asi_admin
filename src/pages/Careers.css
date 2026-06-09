@@ -1,0 +1,381 @@
+.careers-page{
+    min-height:100vh;
+    background:#f8fafc;
+}
+
+.careers-content{
+    margin-left:260px;
+    padding:30px;
+}
+
+.careers-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.careers-header h1{
+    font-size:34px;
+    color:#111827;
+}
+
+.careers-header p{
+    color:#6b7280;
+    margin-top:5px;
+}
+
+.tabs{
+    display:flex;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.tab-btn{
+    border:none;
+    background:white;
+    padding:12px 20px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.tab-btn.active{
+    background:#dc2626;
+    color:white;
+}
+
+.table-card{
+    background:white;
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#f9fafb;
+    padding:16px;
+    text-align:left;
+}
+
+td{
+    padding:16px;
+    border-top:1px solid #f1f5f9;
+}
+
+.btn-primary{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.modal{
+    background:white;
+    width:600px;
+    max-width:95%;
+    border-radius:20px;
+    padding:25px;
+}
+
+.modal input,
+.modal textarea,
+.modal select{
+    width:100%;
+    margin-bottom:12px;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+}
+
+.modal-actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn-secondary{
+    flex:1;
+    border:1px solid #d1d5db;
+    background:white;
+    border-radius:12px;
+}
+/* =========================
+   CAREER PAGE CMS
+========================= */
+
+.cms-card{
+    background:#fff;
+    padding:30px;
+    border-radius:20px;
+    border:1px solid #e5e7eb;
+    margin-bottom:25px;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.cms-card h2{
+    text-align:center;
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:25px;
+    color:#111827;
+}
+
+.cms-card input[type="text"],
+.cms-card textarea{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    margin-bottom:15px;
+    font-size:15px;
+    outline:none;
+}
+
+.cms-card input[type="text"]:focus,
+.cms-card textarea:focus{
+    border-color:#dc2626;
+}
+
+.cms-card input[type="file"]{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.banner-preview{
+    width:220px;
+    height:140px;
+    object-fit:cover;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+    margin-bottom:20px;
+}
+
+.cms-actions{
+    display:flex;
+    justify-content:center;
+    margin:20px 0;
+}
+
+.feature-card{
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.feature-card input,
+.feature-card textarea{
+    width:100%;
+    margin-bottom:12px;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+}
+
+.feature-card textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.feature-actions{
+    display:flex;
+    justify-content:flex-end;
+}
+
+.btn-delete{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn-delete:hover{
+    background:#b91c1c;
+}
+
+.save-page-wrapper{
+    display:flex;
+    justify-content:center;
+    margin-top:25px;
+}
+
+.btn-primary{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:12px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-primary:hover{
+    background:#b91c1c;
+}
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+.table-wrapper table{
+    min-width:850px;
+}
+/* Responsive */
+
+@media(max-width:768px){
+
+    .careers-content{
+        margin-left:0;
+        padding:15px;
+    }
+
+    .careers-header{
+        flex-direction:column;
+        gap:15px;
+        align-items:flex-start;
+    }
+
+    .tabs{
+        flex-wrap:wrap;
+    }
+
+    .cms-card{
+        padding:20px;
+    }
+
+    .banner-preview{
+        width:100%;
+        height:auto;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .careers-content{
+        margin-left:0;
+        width:100%;
+        padding:15px;
+        padding-top:70px;
+    }
+
+    .careers-header{
+        flex-direction:column;
+        gap:15px;
+        align-items:flex-start;
+    }
+
+    .careers-header h1{
+        font-size:26px;
+    }
+
+    .tabs{
+        flex-wrap:wrap;
+        width:100%;
+    }
+
+    .tab-btn{
+        flex:1;
+        min-width:140px;
+    }
+
+    .cms-card{
+        padding:20px;
+    }
+
+    .cms-card h2{
+        font-size:22px;
+    }
+
+    .banner-preview{
+        width:100%;
+        max-width:250px;
+        height:auto;
+    }
+
+    .modal{
+        width:95%;
+        padding:20px;
+        max-height:90vh;
+        overflow-y:auto;
+    }
+
+    .modal-actions{
+        flex-direction:column;
+    }
+
+    .btn-primary,
+    .btn-secondary{
+        width:100%;
+    }
+}
+@media(max-width:480px){
+
+    .careers-content{
+        padding:12px;
+        padding-top:70px;
+    }
+
+    .careers-header h1{
+        font-size:22px;
+    }
+
+    .careers-header p{
+        font-size:14px;
+    }
+
+    .cms-card{
+        padding:15px;
+    }
+
+    .cms-card h2{
+        font-size:18px;
+    }
+
+    .feature-card{
+        padding:15px;
+    }
+
+    .tabs{
+        flex-direction:column;
+    }
+
+    .tab-btn{
+        width:100%;
+    }
+
+    th,
+    td{
+        padding:12px;
+        font-size:13px;
+    }
+
+    .btn-delete{
+        width:100%;
+    }
+}
