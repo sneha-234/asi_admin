@@ -322,8 +322,7 @@ export default function Content() {
                 <button
                   className="btn-manage"
                   onClick={() =>
-                    window.location.href =
-                    "/glance-cards"
+                    navigate("/glance-cards")
                   }
                 >
                   Manage Glance Cards

@@ -425,8 +425,7 @@ const saveAbout = async () => {
           <button
             className="btn-manage"
             onClick={() =>
-              window.location.href =
-              "/values"
+              navigate("/values") 
             }
           >
             Manage Values

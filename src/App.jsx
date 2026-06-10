@@ -15,6 +15,8 @@ import Values from "./pages/Values";
 import CustomerStats from "./pages/CustomerStats";
 import WhyChooseUs from "./pages/WhyChooseUs";
 import ContactUs from "./pages/ContactUs";
+import TermsConditions from "./pages/TermsConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 function App() {
   return (
@@ -35,6 +37,9 @@ function App() {
         <Route path="/customer-stats"element={<CustomerStats/>}/>
         <Route path="/why-choose-us" element={<WhyChooseUs />}/>
         <Route path="/contact-us" element={<ContactUs />}/>
+        <Route path="/terms-conditions" element={<TermsConditions />}/>
+        <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
+        
       </Routes>
     </BrowserRouter>
   );

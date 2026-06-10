@@ -235,6 +235,30 @@ export default function Sidebar() {
             <i className="ti ti-phone" />
             Contact Us
           </Link>
+
+          <Link
+            to="/terms-conditions"
+            className={`menu-link ${
+              location.pathname === "/terms-conditions" ? "active" : ""
+            }`}
+            onClick={closeMenu}
+          >
+            <i className="ti ti-file-text" />
+            Terms & Conditions
+          </Link>
+
+          <Link
+            to="/privacy-policy"
+            className={`menu-link ${
+              location.pathname === "/privacy-policy"
+                ? "active"
+                : ""
+            }`}
+            onClick={closeMenu}
+          >
+            <i className="ti ti-shield-lock" />
+            Privacy Policy
+          </Link>
         </div>
 
         <div className="sidebar-footer">
