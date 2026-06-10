@@ -14,6 +14,8 @@ import customerStatsRoutes from "./routes/customerStats.js";
 import whyChooseUsRoutes from "./routes/whyChooseUsRoutes.js";
 import contactUsRoutes from "./routes/contactUsRoutes.js";
 import authRoutes from "./routes/auth.js";
+import termsRoutes from "./routes/terms.js";
+import privacyPolicyRoutes from "./routes/privacy-policy.js";
 
 
 dotenv.config();
@@ -44,6 +46,8 @@ app.use("/api/customer-page",customerStatsRoutes);
 app.use("/api/why-choose-us",whyChooseUsRoutes);
 app.use( "/api/contact-us",contactUsRoutes);
 app.use("/api/auth",authRoutes);
+app.use("/api/terms",termsRoutes);
+app.use("/api/privacy-policy",privacyPolicyRoutes);
 
 const PORT = process.env.PORT || 5000;
 
