@@ -1,139 +1,144 @@
 import express from "express";
-import multer from "multer";
 import GlanceCard from "../models/GlanceCard.js";
 
 const router = express.Router();
 
 /* =========================
-   MULTER CONFIG
-========================= */
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
-
-  filename: (req, file, cb) => {
-    cb(
-      null,
-      Date.now() + "-" + file.originalname
-    );
-  }
-});
-
-const upload = multer({ storage });
-
-/* =========================
-   GET ALL CARDS
+   GET ALL SECTIONS
 ========================= */
 
 router.get("/", async (req, res) => {
+
   try {
-    const cards = await GlanceCard.find();
+
+    const cards =
+      await GlanceCard.find();
 
     res.json(cards);
-  } catch (err) {
+
+  }
+
+  catch (err) {
+
     res.status(500).json({
       message: err.message
     });
+
   }
+
 });
 
 /* =========================
-   CREATE OR UPDATE CARD
+   CREATE / UPDATE SECTION
 ========================= */
 
-router.post(
-  "/",
-  upload.single("icon"),
-  async (req, res) => {
-    try {
-      console.log("BODY =>", req.body);
-      console.log("FILE =>", req.file);
+router.post("/", async (req, res) => {
 
-      let card;
+  try {
 
-      // UPDATE
-      if (req.body.id) {
-        const existingCard =
-          await GlanceCard.findById(
-            req.body.id
-          );
+    console.log(
+      "BODY =>",
+      req.body
+    );
 
-        if (!existingCard) {
-          return res.status(404).json({
-            message: "Card not found"
-          });
-        }
+    let card;
 
-        const updateData = {
-          title: req.body.title,
-          description: req.body.description,
+    // UPDATE
+    if (req.body.id) {
 
-          // old image preserve
-          icon: existingCard.icon
-        };
+      card =
+        await GlanceCard.findByIdAndUpdate(
 
-        // new image selected
-        if (req.file) {
-          updateData.icon =
-            "/uploads/" +
-            req.file.filename;
-        }
+          req.body.id,
 
-        card =
-          await GlanceCard.findByIdAndUpdate(
-            req.body.id,
-            updateData,
-            { new: true }
-          );
-      }
+          {
+            content:
+              req.body.content
+          },
 
-      // CREATE
-      else {
-        card = await GlanceCard.create({
-          title: req.body.title,
-          description:
-            req.body.description,
+          {
+            new: true
+          }
 
-          icon: req.file
-            ? "/uploads/" +
-              req.file.filename
-            : ""
-        });
-      }
+        );
 
-      res.json(card);
-    } catch (err) {
-      console.log(err);
-
-      res.status(500).json({
-        message: err.message
-      });
     }
+
+    // CREATE
+    else {
+
+      card =
+        await GlanceCard.create({
+
+          content:
+            req.body.content
+
+        });
+
+    }
+
+    res.json({
+
+      success: true,
+
+      data: card
+
+    });
+
   }
-);
+
+  catch (err) {
+
+    console.log(err);
+
+    res.status(500).json({
+
+      success: false,
+
+      message: err.message
+
+    });
+
+  }
+
+});
 
 /* =========================
-   DELETE CARD
+   DELETE SECTION
 ========================= */
 
 router.delete("/:id", async (req, res) => {
+
   try {
+
     await GlanceCard.findByIdAndDelete(
       req.params.id
     );
 
     res.json({
+
       success: true,
+
       message:
-        "Card deleted successfully"
+        "Section deleted successfully"
+
     });
-  } catch (err) {
-    res.status(500).json({
-      message: err.message
-    });
+
   }
+
+  catch (err) {
+
+    res.status(500).json({
+
+      success: false,
+
+      message:
+        err.message
+
+    });
+
+  }
+
 });
 
 export default router;

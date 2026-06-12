@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../services/api";
 import Sidebar from "../components/Sidebar";
-import "./GlanceCards.css";
+import api from "../services/api";
+import "./Content.css";
 
 export default function GlanceCards() {
 
@@ -19,11 +19,17 @@ export default function GlanceCards() {
     try {
 
       const res =
-        await api.get("/glancecards");
+        await api.get(
+          "/glancecards"
+        );
 
-      setCards(res.data);
+      setCards(
+        res.data || []
+      );
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
       console.log(err);
 
@@ -34,32 +40,18 @@ export default function GlanceCards() {
   const addCard = () => {
 
     setCards([
+
       ...cards,
+
       {
-        title: "",
-        description: "",
-        icon: null,
-        isNew: true
+        content: ""
       }
+
     ]);
 
   };
 
-  const handleChange = (
-    index,
-    field,
-    value
-  ) => {
-
-    const updated = [...cards];
-
-    updated[index][field] = value;
-
-    setCards(updated);
-
-  };
-
-  const removeCard = async (
+  const deleteCard = async (
     index,
     id
   ) => {
@@ -76,12 +68,15 @@ export default function GlanceCards() {
 
       const updated =
         cards.filter(
-          (_, i) => i !== index
+          (_, i) =>
+            i !== index
         );
 
       setCards(updated);
 
-    } catch (err) {
+    }
+
+    catch (err) {
 
       console.log(err);
 
@@ -89,98 +84,62 @@ export default function GlanceCards() {
 
   };
 
-const saveCards = async () => {
-  try {
+  const updateCard = (
+    index,
+    value
+  ) => {
 
-    for (const card of cards) {
+    const updated =
+      [...cards];
 
-      console.log("CARD DATA =>", card);
+    updated[index].content =
+      value;
 
-      const formData = new FormData();
+    setCards(updated);
 
-      // Update case
-      if (card._id) {
-        formData.append("id", card._id);
+  };
 
-        console.log(
-          "UPDATING CARD ID =>",
-          card._id
-        );
-      } else {
-        console.log(
-          "NEW CARD CREATE"
-        );
-      }
-      
-      formData.append(
-        "title",
-        card.title || ""
-      );
+  const saveCards = async () => {
 
-      formData.append(
-        "description",
-        card.description || ""
-      );
+    try {
 
-      // Only new image upload
-      if (
-        card.icon &&
-        typeof card.icon !== "string"
-      ) {
+      for (const card of cards) {
 
-        console.log(
-          "ICON FILE =>",
-          card.icon
-        );
-
-        formData.append(
-          "icon",
-          card.icon
-        );
-      }
-
-      // Debug FormData
-      for (let pair of formData.entries()) {
-        console.log(
-          pair[0],
-          pair[1]
-        );
-      }
-
-      const response =
         await api.post(
           "/glancecards",
-          formData,
           {
-            headers: {
-              "Content-Type":
-                "multipart/form-data",
-            },
+            id:
+              card._id || "",
+
+            content:
+              card.content || ""
           }
         );
 
-      console.log(
-        "API RESPONSE =>",
-        response.data
+      }
+
+      alert(
+        "Glance Content Saved Successfully"
       );
+
+      await loadCards();
+
     }
 
-    alert(
-      "Cards Saved Successfully"
-    );
+    catch (err) {
 
-    await loadCards();
+      console.log(
+        "SAVE ERROR =>",
+        err
+      );
 
-  } catch (err) {
+      alert(
+        "Save Failed"
+      );
 
-    console.error(
-      "SAVE ERROR =>",
-      err
-    );
+    }
 
-    alert("Save Failed");
-  }
-};
+  };
 
   return (
 
@@ -192,9 +151,17 @@ const saveCards = async () => {
 
         <div className="page-header">
 
-          <h1>
-            Glance Cards
-          </h1>
+          <div>
+
+            <h1>
+              Glance Cards
+            </h1>
+
+            <p>
+              Manage HTML Content
+            </p>
+
+          </div>
 
           <div>
 
@@ -204,111 +171,130 @@ const saveCards = async () => {
                 navigate("/content")
               }
             >
-               ← Back To Home
+              ← Back To Home
             </button>
 
             <button
               className="btn-save-all"
               onClick={saveCards}
             >
-              Save Cards
+              Save Changes
             </button>
 
           </div>
 
         </div>
 
-        <button
-          className="btn-add-card"
-          onClick={addCard}
-        >
-          + Add Card
-        </button>
-
-        {cards.map(
-          (card, index) => (
+        <div className="content-card">
 
           <div
-            className="content-card"
-            key={index}
+            style={{
+              display: "flex",
+              justifyContent:
+                "space-between",
+              alignItems:
+                "center",
+              marginBottom:
+                "20px"
+            }}
           >
 
             <h3>
-              Card {index + 1}
+              HTML Sections
             </h3>
 
-            <input
-              type="text"
-              placeholder="Title"
-              value={card.title || ""}
-              onChange={(e)=>
-                handleChange(
-                  index,
-                  "title",
-                  e.target.value
-                )
-              }
-            />
-
-            <textarea
-              placeholder="Description"
-              value={
-                card.description || ""
-              }
-              onChange={(e)=>
-                handleChange(
-                  index,
-                  "description",
-                  e.target.value
-                )
-              }
-            />
-
-             <input
-                type="file"
-                onChange={(e) => {
-
-                  console.log("SELECTED FILE =>", e.target.files[0]);
-
-                  handleChange(
-                    index,
-                    "icon",
-                    e.target.files[0]
-                  );
-
-                }}
-              />
-
-            {card.icon && typeof card.icon === "string" && (
-              <img
-                src={`https://asi-admin-4.onrender.com${card.icon}`}
-                alt=""
-                width="80"
-              />
-            )}
-
-            {card.icon && typeof card.icon !== "string" && (
-              <img
-                src={URL.createObjectURL(card.icon)}
-                alt=""
-                width="80"
-              />
-            )}
             <button
-              className="btn-delete"
-              onClick={() =>
-                removeCard(
-                  index,
-                  card._id
-                )
+              className="btn-primary"
+              onClick={
+                addCard
               }
             >
-              Delete
+              + Add Section
             </button>
 
           </div>
 
-        ))}
+          {
+
+            cards.map(
+              (
+                card,
+                index
+              ) => (
+
+                <div
+                  key={index}
+                  style={{
+                    border:
+                      "1px solid #ddd",
+                    borderRadius:
+                      "10px",
+                    padding:
+                      "20px",
+                    marginBottom:
+                      "25px"
+                  }}
+                >
+
+                  <h4>
+                    Section {index + 1}
+                  </h4>
+
+                  <textarea
+                    rows="20"
+                    value={
+                      card.content || ""
+                    }
+                    onChange={(e) =>
+                      updateCard(
+                        index,
+                        e.target.value
+                      )
+                    }
+                    style={{
+                      width:
+                        "100%",
+                      minHeight:
+                        "500px",
+                      fontFamily:
+                        "monospace",
+                      fontSize:
+                        "14px",
+                      padding:
+                        "12px",
+                      border:
+                        "1px solid #ccc",
+                      borderRadius:
+                        "6px",
+                      marginTop:
+                        "15px"
+                    }}
+                  />
+
+                  <button
+                    className="btn-delete"
+                    style={{
+                      marginTop:
+                        "15px"
+                    }}
+                    onClick={() =>
+                      deleteCard(
+                        index,
+                        card._id
+                      )
+                    }
+                  >
+                    Delete Section
+                  </button>
+
+                </div>
+
+              )
+            )
+
+          }
+
+        </div>
 
       </div>
 
