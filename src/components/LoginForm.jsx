@@ -32,7 +32,7 @@ export default function LoginForm() {
 
         const res =
           await axios.post(
-            "https://asi-admin-4.onrender.com/api/auth/login",
+            "https://asiindore.co.in/api/auth/login",
             {
               username,
               password

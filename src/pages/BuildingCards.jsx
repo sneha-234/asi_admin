@@ -292,7 +292,7 @@ const saveCards = async () => {
             {card.image &&
                 typeof card.image === "string" && (
                   <img
-                    src={`https://asi-admin-4.onrender.com${card.image}`}
+                    src={`https://asiindore.co.in${card.image}`}
                     alt=""
                     width="120"
                   />

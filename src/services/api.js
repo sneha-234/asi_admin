@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://asi-admin-4.onrender.com/api/",
+  baseURL: "https://asiindore.co.in/api/",
 });
 
 api.interceptors.request.use((config) => {
