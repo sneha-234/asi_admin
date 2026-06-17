@@ -255,7 +255,7 @@ const savePageContent = async () => {
 
       <img
         src={
-          "https://asi-admin-4.onrender.com" +
+          "https://cms.asiindore.co.in" +
           pageData.bannerImage
         }
         alt=""

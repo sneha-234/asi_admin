@@ -271,7 +271,7 @@ export default function WhyChooseUs() {
 
               <img
                 src={
-                  "https://asi-admin-4.onrender.com" +
+                  "https://cms.asiindore.co.in" +
                   page.backgroundImage
                 }
                 alt=""
