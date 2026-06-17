@@ -275,7 +275,7 @@ export default function ContactUs() {
 
               <img
                 src={
-                  "https://cms.asiindore.co.in" +
+                  "https://asi-admin-4.onrender.com" +
                   pageData.bannerImage
                 }
                 alt=""
