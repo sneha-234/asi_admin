@@ -1,14 +1,21 @@
 import express from "express";
-import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 import WhyChooseUs from "../models/WhyChooseUs.js";
+import multer from "multer";
 
 const router =
 express.Router();
 
-const upload =
-multer({
-  dest:"uploads/"
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "asi-industries",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+  },
 });
+
+const upload = multer({ storage });
 
 router.get(
   "/",
@@ -56,11 +63,10 @@ router.post(
 
       };
 
-      if(req.file){
+      if (req.file) {
 
         data.backgroundImage =
-        "/uploads/" +
-        req.file.filename;
+        req.file.path;
 
       }
 

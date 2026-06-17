@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
-import path from "path";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 import ProductPage from "../models/Product.js";
 
 const router = express.Router();
@@ -9,33 +10,17 @@ const router = express.Router();
    MULTER CONFIG
 ========================= */
 
-const storage = multer.diskStorage({
-
-  destination: (req, file, cb) => {
-
-    cb(
-      null,
-      "uploads"
-    );
-
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "asi-products",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
   },
-
-  filename: (req, file, cb) => {
-
-    cb(
-      null,
-      Date.now() +
-      path.extname(
-        file.originalname
-      )
-    );
-
-  }
-
 });
 
-const upload =
-  multer({ storage });
+const upload = multer({ storage });
+
+
 
 /* =========================
    GET PAGE DATA
@@ -119,13 +104,12 @@ router.post(
 
       };
 
-      if (req.file) {
+       if (req.file) {
 
-        data.bannerImage =
-          "/uploads/" +
-          req.file.filename;
+          data.bannerImage =
+            req.file.path;
 
-      }
+        }
 
       if (page) {
 

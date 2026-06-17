@@ -1,17 +1,17 @@
 import express from "express";
 import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 import BuildingCard from "../models/BuildingCard.js";
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "asi-building-cards",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
   },
-
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
-  }
 });
 
 const upload = multer({ storage });
@@ -55,9 +55,9 @@ router.post("/", upload.single("image"), async (req, res) => {
       };
 
       if (req.file) {
-        updateData.image =
-          "/uploads/" + req.file.filename;
-      }
+          updateData.image =
+            req.file.path;
+        }
 
       card =
         await BuildingCard.findByIdAndUpdate(
@@ -74,8 +74,8 @@ router.post("/", upload.single("image"), async (req, res) => {
         title: req.body.title,
         description: req.body.description,
         image: req.file
-          ? "/uploads/" + req.file.filename
-          : "",
+        ? req.file.path
+        : "",
         order: req.body.order || 1
       });
 

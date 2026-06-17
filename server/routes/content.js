@@ -2,18 +2,20 @@ import express from "express";
 import multer from "multer";
 import { Brand, Leader, Content }from "../models/Content.js";
 import protect from "../middleware/auth.js";
-import path from "path";
-import { fileURLToPath } from "url";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename)
 const router = express.Router();
 
 // ── Image Upload ──────────────────────────────────────────────
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, '../uploads')),
-  filename:    (req, file, cb) => cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '-'))
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "asi-brands",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+  },
 });
+
 const upload = multer({ storage });
 
 // ── BRANDS ────────────────────────────────────────────────────
@@ -113,8 +115,7 @@ router.post(
         if (req.file) {
 
           updateData.logo =
-            "/uploads/" +
-            req.file.filename;
+           req.file.path;
 
         }
 
@@ -184,8 +185,7 @@ router.post(
             await Brand.create({
 
               logo:
-                "/uploads/" +
-                req.file.filename,
+              req.file.path,
 
               isSection: false,
 
@@ -398,7 +398,7 @@ router.post(
 
       res.json({
         success: true,
-        image: '/uploads/' + req.file.filename
+        image: req.file.path
       });
 
     } catch (err) {

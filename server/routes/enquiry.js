@@ -2,12 +2,20 @@ import express from "express";
 import Enquiry from "../models/Enquiry.js";
 import protect from "../middleware/auth.js";
 import multer from "multer";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 
 const router = express.Router();
 
-const upload = multer({
-  dest: "uploads/"
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "asi-enquiry",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+  },
 });
+
+const upload = multer({ storage });
 
 /* =====================================
    PAGE CONTENT CMS
@@ -92,11 +100,10 @@ router.post(
       if (req.file) {
 
         data.bannerImage =
-          "/uploads/" +
-          req.file.filename;
+          req.file.path;
 
       }
-
+      
       if (page) {
 
         page =
