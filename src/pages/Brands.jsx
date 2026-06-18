@@ -27,57 +27,52 @@ export default function Brands() {
     loadBrands();
   }, []);
 
-  const loadBrands = async () => {
+ const loadBrands = async () => {
 
-    try {
+  try {
 
-      const res =
-        await api.get(
-          "/content/brands"
-        );
+    const res =
+      await api.get("/content/brands");
 
-      const data =
-        Array.isArray(res.data)
-          ? res.data
-          : [];
+    console.log("BRANDS DATA =>", res.data);
 
-      const section =
-        data.find(
-          item => item.isSection
-        );
+    const data =
+      Array.isArray(res.data)
+        ? res.data
+        : [];
 
-      const logoData =
-        data.filter(
-          item => !item.isSection
-        );
+    const section =
+      data.find(
+        item => item.isSection
+      );
 
-      setLogos(logoData);
+    const logoData =
+      data.filter(
+        item => !item.isSection
+      );
 
-      if (section) {
+    console.log(
+      "LOGOS =>",
+      logoData
+    );
 
-        setSectionId(
-          section._id
-        );
+    setLogos(logoData);
 
-        setSectionTitle(
-          section.title || ""
-        );
-
-        setSectionSubtitle(
-          section.subtitle || ""
-        );
-
-      }
-
-    } catch (err) {
-
-      console.log(err);
-
-      setLogos([]);
-
+    if (section) {
+      setSectionId(section._id);
+      setSectionTitle(section.title || "");
+      setSectionSubtitle(section.subtitle || "");
     }
 
-  };
+  } catch (err) {
+
+    console.log(err);
+
+    setLogos([]);
+
+  }
+
+};
 
   const saveSection = async () => {
 
@@ -295,7 +290,7 @@ export default function Brands() {
                 {brand.logo && (
 
                   <img
-                    src={`https://asi-admin-4.onrender.com${brand.logo}`}
+                    src={brand.logo}
                     alt="Brand Logo"
                     className="brand-logo"
                   />

@@ -30,39 +30,51 @@ export default function Products() {
 
   }, []);
 
-  const loadPage = async () => {
+const loadPage = async () => {
 
-    try {
+  try {
 
-      const res =
-        await api.get(
-          "/product-page"
-        );
+    const res =
+      await api.get(
+        "/product-page"
+      );
 
-      setProductPage({
+    console.log(
+      "API DATA =>",
+      res.data
+    );
 
-        heading:
-          res.data.heading || "",
+    console.log(
+      "IMAGE =>",
+      res.data.bannerImage
+    );
 
-        subheading:
-          res.data.subheading || "",
+    setProductPage({
 
-        bannerImage:
-          res.data.bannerImage || "",
+      heading:
+        res.data.heading || "",
 
-        sections:
-          res.data.sections || []
+      subheading:
+        res.data.subheading || "",
 
-      });
+      bannerImage:
+        res.data.bannerImage || "",
 
-    } catch (err) {
+      sections:
+        res.data.sections || []
 
-      console.log(err);
+    });
 
-    }
+  } catch (err) {
 
-  };
+    console.log(
+      "LOAD PAGE ERROR =>",
+      err
+    );
 
+  }
+
+};
   const addSection = () => {
 
     setProductPage({
@@ -289,7 +301,7 @@ export default function Products() {
             productPage.bannerImage && (
 
               <img
-                src={`https://asi-admin-4.onrender.com${productPage.bannerImage}`}
+                src={productPage.bannerImage}
                 width="250"
                 alt=""
                 style={{
