@@ -270,10 +270,7 @@ export default function WhyChooseUs() {
             page.backgroundImage && (
 
               <img
-                src={
-                  "https://asi-admin-4.onrender.com" +
-                  page.backgroundImage
-                }
+                src={page.backgroundImage}
                 alt=""
                 className="preview-image"
               />

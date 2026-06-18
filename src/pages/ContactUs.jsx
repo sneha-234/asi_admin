@@ -274,10 +274,7 @@ export default function ContactUs() {
             pageData.bannerImage && (
 
               <img
-                src={
-                  "https://asi-admin-4.onrender.com" +
-                  pageData.bannerImage
-                }
+                src={pageData.bannerImage}
                 alt=""
                 className="preview-image"
               />

@@ -42,33 +42,29 @@ const [presenceImage1, setPresenceImage1] =
 const [presenceImage2, setPresenceImage2] =
   useState(null);
 
-  const uploadImage = async (file) => {
+const uploadImage = async (file) => {
 
   if (!file) return "";
 
-  const formData =
-    new FormData();
+  const formData = new FormData();
+  formData.append("image", file);
 
-  formData.append(
-    "image",
-    file
+  const res = await api.post(
+    "/content/upload",
+    formData,
+    {
+      headers: {
+        "Content-Type":
+          "multipart/form-data"
+      }
+    }
   );
 
-  const res =
-    await api.post(
-      "/content/upload",
-      formData,
-      {
-        headers: {
-          "Content-Type":
-            "multipart/form-data"
-        }
-      }
-    );
+  console.log("UPLOAD RESPONSE =>", res.data);
 
   return res.data.image;
-
 };
+
 
   const handleChange = (e) => {
 
@@ -258,11 +254,11 @@ const saveAbout = async () => {
 
 {aboutData.hero_image && (
 
-  <img
-    src={`https://asi-admin-4.onrender.com${aboutData.hero_image}`}
-    width="150"
-    alt=""
-  />
+ <img
+  src={aboutData.hero_image}
+  width="150"
+  alt=""
+/>
 
 )}
 
@@ -313,10 +309,10 @@ const saveAbout = async () => {
 {aboutData.vision_image && (
 
   <img
-    src={`https://asi-admin-4.onrender.com${aboutData.vision_image}`}
-    width="150"
-    alt=""
-  />
+  src={aboutData.vision_image}
+  width="150"
+  alt=""
+/>
 
 )}
 
@@ -373,10 +369,10 @@ const saveAbout = async () => {
 {aboutData.presence_image1 && (
 
   <img
-    src={`https://asi-admin-4.onrender.com${aboutData.presence_image1}`}
-    width="150"
-    alt=""
-  />
+  src={aboutData.presence_image1}
+  width="150"
+  alt=""
+/>
 
 )}
 
@@ -396,10 +392,10 @@ const saveAbout = async () => {
 {aboutData.presence_image2 && (
 
   <img
-    src={`https://asi-admin-4.onrender.com${aboutData.presence_image2}`}
-    width="150"
-    alt=""
-  />
+  src={aboutData.presence_image2}
+  width="150"
+  alt=""
+/>
 
 )}
 

@@ -328,18 +328,15 @@ const savePageContent = async () => {
 
     pageData.bannerImage && (
 
-      <img
-        src={
-          "https://asi-admin-4.onrender.com" +
-          pageData.bannerImage
-        }
-        alt=""
-        style={{
-          width:"250px",
-          marginTop:"15px",
-          borderRadius:"10px"
-        }}
-      />
+    <img
+      src={pageData.bannerImage}
+      alt=""
+      style={{
+        width: "250px",
+        marginTop: "15px",
+        borderRadius: "10px"
+      }}
+    />
 
     )
 
