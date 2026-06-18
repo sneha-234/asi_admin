@@ -77,6 +77,15 @@ router.post(
     "bannerImage"
   ),
   async (req, res) => {
+     console.log(
+      "Cloud Name =>",
+      process.env.CLOUDINARY_CLOUD_NAME
+    );
+
+    console.log(
+      "File =>",
+      req.file
+    );
 
     try {
 

@@ -181,13 +181,19 @@ export default function Products() {
 
     } catch (err) {
 
-      console.log(err);
+        console.log(err);
 
-      alert(
-        "Error Saving Data"
-      );
+        console.log(
+          "Server Error =>",
+          err.response?.data
+        );
 
-    }
+        alert(
+          err.response?.data?.error ||
+          "Error Saving Data"
+        );
+
+      }
 
   };
 
