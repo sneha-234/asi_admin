@@ -38,6 +38,7 @@ export default function LoginForm() {
               password
             }
           );
+          console.log(res.data);
 
         localStorage.setItem(
           "token",

@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Sidebar.css";
 
@@ -14,6 +14,16 @@ export default function Sidebar() {
   const [aboutOpen, setAboutOpen] = useState(
     ["/about-content", "/values", "/leaders"].includes(location.pathname)
   );
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+
+    navigate("/");
+
+  };
 
   const closeMenu = () => {
     if (window.innerWidth <= 768) {
@@ -262,7 +272,10 @@ export default function Sidebar() {
         </div>
 
         <div className="sidebar-footer">
-          <button className="logout-btn">
+          <button
+            className="logout-btn"
+            onClick={handleLogout}
+          >
             <i className="ti ti-logout" /> Logout
           </button>
         </div>
